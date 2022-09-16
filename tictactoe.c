@@ -58,7 +58,7 @@ int getRandom(int rangeLow, int rangeHigh) {
 
 ValidMoves get_valid_moves() {
     ValidMoves valid_moves;
-
+    valid_moves.num_valid = 0;
     for (int i = 0; i < NUM_SPACES; i++) {
         if (global_game_state.board[i] == NO_MOVE) {
             valid_moves.valid_moves[valid_moves.num_valid++] = i;
@@ -162,7 +162,7 @@ int main(int argc, char* argv) {
     pthread_mutex_init(&signal_mutex, NULL);
 
     PlayerData player_o = {0, O_PLAYER};
-    PlayerData player_x = {0, X_PLAYER};
+    PlayerData player_x = {1, X_PLAYER};
     pthread_create(&player_o.thread_id, NULL, play_game, (void*)&player_o);
     pthread_create(&player_x.thread_id, NULL, play_game, (void*)&player_x);
     pthread_join(player_o.thread_id, NULL);
